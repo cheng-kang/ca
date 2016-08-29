@@ -1,0 +1,155 @@
+<nav class="level">
+    <div class="level-item has-text-centered">
+        <p class="heading"> </p>
+        <p class="heading" id="TodayTitle">Today is</p>
+        <p class="title" id="TodayDate"></p>
+    </div>
+</nav>
+<article class="message is-info has-text-centered">
+    <div class="message-header">❤️我们的时间❤️</div>
+    <div class="message-body">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <p class="heading">Los Ageles, US</p>
+                <p class="title" id="Los Ageles, US"></p>
+            </div>
+            <div class="level-item has-text-centered">
+                <p class="heading">London, UK</p>
+                <p class="title" id="London, UK"></p>
+            </div>
+            <div class="level-item has-text-centered">
+                <p class="heading">Beijing, CN</p>
+                <p class="title" id="Beijing, CN"></p>
+            </div>
+        </nav>
+        <table class="table is-bordered is-striped is-narrow">
+            <thead>
+                <tr>
+                    <th>洛杉矶时间</th>
+                    <th>伦敦时间</th>
+                    <th>北京时间</th>
+                    <th>备注</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>00:00</td>
+                    <td>08:00</td>
+                    <td>15:00</td>
+                    <td>哥哥起床</td></tr>
+                <tr>
+                    <td>02:00</td>
+                    <td>10:00</td>
+                    <td>17:00</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>04:00</td>
+                    <td>12:00</td>
+                    <td>19:00</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>06:00</td>
+                    <td>14:00</td>
+                    <td>21:00</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>08:00</td>
+                    <td>16:00</td>
+                    <td>23:00</td>
+                    <td>宝贝起床</td></tr>
+                <tr>
+                    <td>10:00</td>
+                    <td>18:00</td>
+                    <td>01:00(+1)</td>
+                    <td>哥哥睡觉</td></tr>
+                <tr>
+                    <td>12:00</td>
+                    <td>20:00</td>
+                    <td>03:00(+1)</td>
+                    <td>宝贝午饭</td></tr>
+                <tr>
+                    <td>14:00</td>
+                    <td>22:00</td>
+                    <td>05:00(+1)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>16:00</td>
+                    <td>00:00(+1)</td>
+                    <td>07:00(+1)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>18:00</td>
+                    <td>02:00(+1)</td>
+                    <td>09:00(+1)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>20:00</td>
+                    <td>04:00(+1)</td>
+                    <td>11:00(+1)</td>
+                    <td>宝贝睡觉</td></tr>
+                <tr>
+                    <td>22:00</td>
+                    <td>06:00(+1)</td>
+                    <td>13:00(+1)</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</article>
+
+<script type="text/javascript">
+    var todayText = getTodayText(-8)
+    document.getElementById("NavTitle").innerHTML = isNaN(todayText[1]) ? "" : "Clock - THE " + todayText[1] +"TH DAY - Catherine ♥︎ Ant"
+    document.getElementById("TodayDate").innerHTML = todayText[0];
+    setTime()
+
+    var t = setInterval(setTime,1000);
+    //得到标准时区的时间的函数
+    function getLocalTime(i) {
+        //参数i为时区值数字，比如北京为东八区则输进8,西5输入-5
+        if (typeof i !== 'number') return;
+        var d = new Date();
+        //得到1970年一月一日到现在的秒数
+        var len = d.getTime();
+        //本地时间与GMT时间的时间偏移差
+        var offset = d.getTimezoneOffset() * 60000;
+        //得到现在的格林尼治时间
+        var utcTime = len + offset;
+
+        var date = new Date(utcTime + 3600000 * i)
+        return (date.getHours() > 9 ? date.getHours() : "0"+date.getHours()) + ":" + (date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes()) + ":" + (date.getSeconds() > 9 ? date.getSeconds() : "0"+date.getSeconds());
+    }
+    //得到当天的标签
+    function getTodayText(i) {
+        //参数i为时区值数字，比如北京为东八区则输进8,西5输入-5
+        if (typeof i !== 'number') return;
+        var d = new Date();
+        //得到1970年一月一日到现在的秒数
+        var len = d.getTime();
+        //本地时间与GMT时间的时间偏移差
+        var offset = d.getTimezoneOffset() * 60000;
+        //得到现在的格林尼治时间
+        var utcTime = len + offset;
+
+        var currentDate = new Date(utcTime + 3600000 * i);
+
+        // var theDay = new Date();
+        // theDay.setFullYear(2016,5,31);
+        // theDay.setHours(0,0,0,0);
+        var a = Date.parse("2016-05-31T00:00");
+        // alert(currentDate.getTime())
+        var days = parseInt(Math.abs(currentDate.getTime()  -  a.getTime())  /  1000  /  60  /  60  / 24) 
+        return [currentDate.toDateString(),days];
+    }
+    function setTime() {
+        document.getElementById("Los Ageles, US").innerHTML = getLocalTime(-8);
+        document.getElementById("London, UK").innerHTML = getLocalTime(0);
+        document.getElementById("Beijing, CN").innerHTML = getLocalTime(8);
+    }
+</script>

@@ -1,0 +1,28 @@
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <p class="heading"> </p>
+    <p class="heading">Catherine's</p>
+    <p class="title">Homework</p>
+  </div>
+</nav>
+<article class="message is-info has-text-centered">
+    <div class="message-header">Edit Homework</div>
+    <div class="message-body">
+      <label class="label">Subject & Deadline</label>
+      <div class="control is-grouped">
+        <p class="control is-expanded">
+          <input class="input" type="text" placeholder="eg. Math" ng-model="homework.subject">
+        </p>
+        <p class="control is-expanded">
+          <input class="input" type="text" placeholder="eg. 2016-09-01(T12:00)" ng-model="homework.deadline">
+        </p>
+      </div>
+      <label class="label">Homework</label>
+      <p class="control">
+          <textarea class="textarea" placeholder="eg. Page 51" ng-model="homework.content"></textarea>
+      </p>
+      <p class="control">
+          <a class="button" href="#homework">Back</a>
+      </p>
+    </div>
+</article>

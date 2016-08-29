@@ -1,0 +1,110 @@
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <p class="heading"> </p>
+    <p class="heading">Catherine's</p>
+    <p class="title">Homework</p>
+  </div>
+  <div class="level-item has-text-centered">
+    <p class="heading">To Do</p>
+    <p class="title">{{ todoList.length }}</p>
+  </div>
+  <div class="level-item has-text-centered">
+    <p class="heading">Done</p>
+    <p class="title">{{ doneList.length }}</p>
+  </div>
+  <div class="level-item has-text-centered">
+    <p class="heading">Late Work</p>
+    <p class="title">{{ lateList.length }}</p>
+  </div>
+</nav>
+<div class="tabs is-boxed">
+  <ul>
+    <li id="tab1" class="is-active" ng-click="switchTab(0)">
+      <a>
+        <span class="icon is-small">📖</span>
+        <span>To Do</span>
+      </a>
+    </li>
+    <li id="tab2" ng-click="switchTab(1)">
+      <a>
+        <span class="icon is-small">📚</span>
+        <span>Done</span>
+      </a>
+    </li>
+    <li id="tab3" ng-click="switchTab(2)">
+      <a>
+        <span class="icon is-small">🙈</span>
+        <span>Late Work</span>
+      </a>
+    </li>
+    <li id="tab4">
+      <a href="#homework-new">
+        <span class="icon is-small">➕</span>
+        <span>Add</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div id="todo">
+  <article class="message {{ homework.nohurry ? 'is-info' : 'is-warning' }}" ng-repeat="homework in todoList | orderBy:'timestamp'" ng-click="showModal(homework)">
+    <div class="message-header">
+      {{ homework.subject }}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10px;">{{ getStatus(homework.deadline) == 'nohurry' ? "✊🏻加油加油！" : "⌛️注意时间哦~" }}</span>
+    </div>
+    <div class="message-body">
+    {{ homework.content }}
+    <span class="help {{ getStatus(homework.deadline) == 'nohurry' ? 'is-info' : 'is-danger' }}">Deadline: {{ homework.deadline }}&nbsp;&nbsp;&nbsp;&nbsp;{{ getTimeText(homework.deadline) }}</span>
+    </div>
+  </article>
+</div>
+
+<div id="done" style="display: none;">
+<article id="done" class="message is-success" ng-repeat="homework in done | orderBy:'timestamp'">
+  <div class="message-header">
+    {{ homework.subject }}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10px;">🌺奖励花花！</span>
+  </div>
+  <div class="message-body">
+  {{ homework.content }}
+  <span class="help is-info">Deadline: {{ homework.deadline }}&nbsp;&nbsp;&nbsp;&nbsp;{{ getTimeText(homework.deadline) }}</span>
+  </div>
+</article>
+</div>
+
+<div id="late" style="display: none;">
+<article id="late" class="message" ng-repeat="homework in lateList | orderBy:'-timestamp'">
+  <div class="message-header">
+    {{ homework.subject }}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10px;">😘再接再厉~</span>
+  </div>
+  <div class="message-body">
+  {{ homework.content }}
+  <span class="help">Deadline: {{ homework.deadline }}&nbsp;&nbsp;&nbsp;&nbsp;{{ getTimeText(homework.deadline) }}</span>
+  </div>
+</article>
+</div>
+
+
+<div id="modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p id="modal-title" class="modal-card-title">Homework</p>
+      <button class="delete" ng-click="hideModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <p id="modal-content"></p>
+      <hr style="margin: 20px 0 10px 0;">
+      <span class="help">
+        <p>Press <strong>Done</strong> to mark this homework as Done.</p>
+        <p>Press <strong>Cancel</strong> to dismiss this alert.</p>
+        <p>Press <strong>Edit</strong> to edit this homework.</p>
+        <p>Press <strong>Delete</strong> to delete this homework.</p>
+      </span>
+    </section>
+    <footer class="modal-card-foot">
+      <a class="button is-primary" ng-click="markDone()">Done</a>
+      <a class="button" ng-click="hideModal()">Cancel</a>
+      <a id="edit-btn" class="button is-link">Edit</a>
+      <a class="button is-link" ng-click="deleteHomework()">Delete</a>
+    </footer>
+  </div>
+</div>

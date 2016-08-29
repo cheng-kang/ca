@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CAApp">
+    
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Catherine ♥︎ Ant</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <meta name="author" content="CHENGKANG">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.2/css/bulma.min.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <nav class="nav">
+            <div class="nav-left">
+                <a class="nav-item" href="#">
+                    <img src="./static/img/ca.png" alt="Timeline logo">
+                </a>
+            </div>
+            <div class="nav-center">
+                <a class="nav-item" href="#">
+                    <span id="NavTitle">Catherine ♥︎ Ant</span>
+                </a>
+            </div>
+            <span id="nav-toggle" class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <div id="nav-menu" class="nav-right nav-menu">
+                <a class="nav-item" href="#clock">Clock</a>
+                <a class="nav-item" href="#homework">Homework</a>
+                <a class="nav-item" href="#timetable">Timetable</a>
+                <a class="nav-item">i ♥︎ u</a>
+            </div>
+        </nav>
+        
+        <div ng-view></div>
+
+        <footer class="footer">
+          <div class="container">
+            <div class="content has-text-centered">
+              <p>
+                <strong>Catherine ♥︎ Ant</strong> by <a href="http://chengkang.me">CHENGKANG</a>.
+              </p>
+              <p>
+                For his love <a href="http://catherinewei.love">Catherine Wei</a>.
+              </p>
+            </div>
+          </div>
+        </footer>
+
+        <!-- jQuery -->
+        <script src="./static/js/jquery.js"></script>
+
+        <script src="./static/js/date.js"></script>
+
+        <!-- Bulma -->
+        <script src="./static/js/clipboard.min.js"></script>
+        <script src="./static/js/bulma.js"></script>
+
+        <!-- AngularJS -->
+        <script src="./static/js/angular.min.js"></script>
+        <script src="./static/js/angular-route.min.js"></script>
+        <script src="./static/js/angular-sanitize.min.js"></script>
+
+        <!-- Wilddog -->
+        <script src="./static/js/wilddog.js"></script>
+        <!-- Wild-Angular -->
+        <script src="./static/js/wild-angular.min.js"></script>
+
+        <!-- AppJS -->
+        <script src="./app/config.js"></script>
+        <script src="./app/language.js"></script>
+        <script src="./app/app.js"></script>
+        <script src="./app/controllers.js"></script>
+        <script src="./app/services.js"></script>
+        <script src="./app/filters.js"></script>
+    </body>
+
+</html>
