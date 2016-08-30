@@ -105,7 +105,7 @@
 
 <script type="text/javascript">
     var todayText = getTodayText(-8)
-    document.getElementById("NavTitle").innerHTML = isNaN(todayText[1]) ? "" : "Clock - THE " + todayText[1] +"TH DAY - Catherine ♥︎ Ant"
+    document.getElementById("NavTitle").innerHTML = isNaN(todayText[1]) ? "" : "THE " + todayText[1] +"TH DAY - Catherine ♥︎ Ant"
     document.getElementById("TodayDate").innerHTML = todayText[0];
     setTime()
 
@@ -144,7 +144,7 @@
         // theDay.setHours(0,0,0,0);
         var a = Date.parse("2016-05-31T00:00");
         // alert(currentDate.getTime())
-        var days = parseInt(Math.abs(currentDate.getTime()  -  a.getTime())  /  1000  /  60  /  60  / 24) 
+        var days = Math.ceil(Math.abs(currentDate.getTime()  -  a.getTime())  /  1000  /  60  /  60  / 24) 
         return [currentDate.toDateString(),days];
     }
     function setTime() {

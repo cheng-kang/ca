@@ -42,7 +42,7 @@ CAControllers.controller('TimetableCtrl', ['$scope',
             var utcTime = len + offset;
             // 洛杉矶时间
             var currentDate = new Date(utcTime + 3600000 * -7);
-            var dayDif = parseInt((Date.today().next().saturday().getTime() - currentDate.getTime()) /  1000  /  60  /  60  / 24)
+            var dayDif = Math.ceil((Date.today().next().saturday().getTime() - currentDate.getTime()) /  1000  /  60  /  60  / 24)
             $scope.nextHoliday = dayDif + " days😃"
         }
     }
@@ -141,7 +141,7 @@ CAControllers.controller('HomeworkCtrl', ['$scope', '$wilddogArray', "$window",
                 dateText = dateText.substring(0,10) + "T" + dateText.substring(11)
             }
 
-            var dayDif = parseInt((Date.parse(dateText).getTime() - currentDate.getTime()) /  1000  /  60  /  60  / 24)
+            var dayDif = Math.ceil((Date.parse(dateText).getTime() - currentDate.getTime()) /  1000  /  60  /  60  / 24)
 
             if (dayDif > 1) {
                 return dayDif + " days left"
@@ -170,7 +170,7 @@ CAControllers.controller('HomeworkCtrl', ['$scope', '$wilddogArray', "$window",
                 dateText = dateText.substring(0,10) + "T" + dateText.substring(11)
             }
 
-            var dayDif = parseInt((Date.parse(dateText).getTime() - currentDate.getTime()) /  1000  /  60  /  60  / 24)
+            var dayDif = Math.ceil((Date.parse(dateText).getTime() - currentDate.getTime()) /  1000  /  60  /  60  / 24)
 
             if (dayDif > 1) {
                 return "nohurry"

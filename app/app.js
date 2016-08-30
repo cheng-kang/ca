@@ -7,8 +7,6 @@ var CAApp = angular.module('CAApp', [
     'wilddog',
     
     'CAControllers',
-    'CAServices',
-    'CAFilters',
 ]);
 
 CAApp.config(function($routeProvider) {
