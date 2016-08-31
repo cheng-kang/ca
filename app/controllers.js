@@ -14,12 +14,22 @@ CAControllers.controller('TimetableCtrl', ['$scope',
     function ($scope){
         document.getElementById("NavTitle").innerHTML = "Catherine ♥︎ Ant"
 
-        $scope.today = Date.today().toString('ddd MMM dd yyyy');
+        var d = new Date();
+        //得到1970年一月一日到现在的秒数
+        var len = d.getTime();
+        //本地时间与GMT时间的时间偏移差
+        var offset = d.getTimezoneOffset() * 60000;
+        //得到现在的格林尼治时间
+        var utcTime = len + offset;
+        // 洛杉矶时间
+        var currentDate = new Date(utcTime + 3600000 * -7);
+
+        $scope.today = (new Date(utcTime + 3600000 * -7)).toString('ddd MMM dd yyyy');
 
         $scope.getUpAt = ""
-        if (Date.today().addDays(1).is().monday()) {
+        if ((new Date(utcTime + 3600000 * -7)).addDays(1).is().monday()) {
             $scope.getUpAt = "7 AM😬";
-        } else if (Date.today().addDays(1).is().weekday()) {
+        } else if ((new Date(utcTime + 3600000 * -7)).addDays(1).is().weekday()) {
             $scope.getUpAt = "6 AM😪";
         } else {
             $scope.getUpAt = "WHENEVER🌝";
@@ -28,21 +38,12 @@ CAControllers.controller('TimetableCtrl', ['$scope',
         $scope.isMinimumDay = "NO😑";
 
         $scope.nextHoliday = "";
-        if (!Date.today().addDays(1).is().weekday()) {
+        if (!(new Date(utcTime + 3600000 * -7)).addDays(1).is().weekday()) {
             $scope.nextHoliday = "TOMORROW💃🏻💃🏻💃🏻"
-        } else if (!Date.today().addDays(2).is().weekday()) {
+        } else if (!(new Date(utcTime + 3600000 * -7)).addDays(2).is().weekday()) {
             $scope.nextHoliday = "2 days😃"
         } else {
-            var d = new Date();
-            //得到1970年一月一日到现在的秒数
-            var len = d.getTime();
-            //本地时间与GMT时间的时间偏移差
-            var offset = d.getTimezoneOffset() * 60000;
-            //得到现在的格林尼治时间
-            var utcTime = len + offset;
-            // 洛杉矶时间
-            var currentDate = new Date(utcTime + 3600000 * -7);
-            var dayDif = Math.ceil((Date.today().next().saturday().getTime() - currentDate.getTime()) /  1000  /  60  /  60  / 24)
+            var dayDif = parseInt(((new Date(utcTime + 3600000 * -7)).next().saturday().getTime() - (new Date(utcTime + 3600000 * -7)).getTime()) /  1000  /  60  /  60  / 24) - 1
             $scope.nextHoliday = dayDif + " days😃"
         }
     }
@@ -240,6 +241,7 @@ CAControllers.controller('HomeworkNewCtrl', ['$scope', '$wilddogArray', "$window
         $scope.addHomework = function() {
             $scope.homeworks.$add({
                 subject: $scope.subject,
+                type: $scope.type,
                 deadline:$scope.deadline,
                 content: $scope.content,
                 done:"NO",

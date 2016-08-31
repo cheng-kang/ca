@@ -47,13 +47,13 @@
 </div>
 
 <div id="todo">
-  <article class="message {{ homework.nohurry ? 'is-info' : 'is-warning' }}" ng-repeat="homework in todoList | orderBy:'timestamp'" ng-click="showModal(homework)">
-    <div class="message-header">
+  <article class="message {{ homework.nohurry ? 'is-info' : 'is-warning' }}" ng-repeat="homework in todoList | orderBy:'timestamp'" ng-click="showModal(homework)" style="{{ homework.type == 'Quiz' ? 'background-color: rgba(192,162,199,0.1);' : (homework.type == 'Test' ? 'background-color: rgba(245,177,170,0.1);' : '') }}">
+    <div class="message-header" style="{{ homework.type == 'Quiz' ? 'background-color: #c0a2c7;' : (homework.type == 'Test' ? 'background-color: #f5b1aa;' : '') }}">
       {{ homework.subject }}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10px;">{{ getStatus(homework.deadline) == 'nohurry' ? "✊🏻加油加油！" : "⌛️注意时间哦~" }}</span>
     </div>
-    <div class="message-body">
+    <div class="message-body" style="{{ homework.type == 'Quiz' ? 'border-color: #c0a2c7;' : (homework.type == 'Test' ? 'border-color: #f5b1aa;' : '') }}">
     {{ homework.content }}
-    <span class="help {{ getStatus(homework.deadline) == 'nohurry' ? 'is-info' : 'is-danger' }}">Deadline: {{ homework.deadline }}&nbsp;&nbsp;&nbsp;&nbsp;{{ getTimeText(homework.deadline) }}</span>
+    <span class="help {{ getStatus(homework.deadline) == 'nohurry' ? 'is-info' : 'is-danger' }}">Deadline: {{ homework.deadline }}&nbsp;&nbsp;&nbsp;&nbsp;{{ getTimeText(homework.deadline) }}&nbsp;&nbsp;&nbsp;&nbsp;{{ homework.type }}</span>
     </div>
   </article>
 </div>

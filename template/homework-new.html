@@ -8,15 +8,25 @@
 <article class="message is-info has-text-centered">
     <div class="message-header">New Homework</div>
     <div class="message-body">
-      <label class="label">Subject & Deadline</label>
+      <label class="label">Subject & Type</label>
       <div class="control is-grouped">
         <p class="control is-expanded">
           <input class="input" type="text" placeholder="eg. Math" ng-model="subject">
         </p>
+        <p class="control">
+          <span class="select is-fullwidth">
+            <select ng-model="type">
+              <option value="Homework">Homework</option>
+              <option value="Quiz">Quiz</option>
+              <option value="Test">Test</option>
+            </select>
+          </span>
+        </p>
+      </div>
+      <label class="label">Deadline</label>
         <p class="control is-expanded">
           <input class="input" type="text" placeholder="eg. 2016-09-01(T12:00)" ng-model="deadline">
         </p>
-      </div>
       <label class="label">Homework</label>
       <p class="control">
           <textarea class="textarea" placeholder="eg. Page 51" ng-model="content"></textarea>
