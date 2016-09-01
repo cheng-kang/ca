@@ -2,7 +2,7 @@
   <div class="level-item has-text-centered">
     <p class="heading"> </p>
     <p class="heading">Catherine's</p>
-    <p class="title">Homework</p>
+    <p class="title">Assignments</p>
   </div>
   <div class="level-item has-text-centered">
     <p class="heading">To Do</p>
@@ -11,6 +11,7 @@
   <div class="level-item has-text-centered">
     <p class="heading">Done</p>
     <p class="title">{{ doneList.length }}</p>
+    <p class="title" style="font-size: 12px;">🌺x<strong ng-bind="flowerCount"></strong> </p>
   </div>
   <div class="level-item has-text-centered">
     <p class="heading">Late Work</p>
@@ -61,7 +62,7 @@
 <div id="done" style="display: none;">
 <article id="done" class="message is-success" ng-repeat="homework in done | orderBy:'timestamp'">
   <div class="message-header">
-    {{ homework.subject }}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10px;">🌺奖励花花！</span>
+    {{ homework.subject }}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10px;">🌺奖励{{ homework.type == 'Test' ? ' 10 朵' : (homework.type == 'Quiz' ? ' 3 朵' : '') }}花花！</span>
   </div>
   <div class="message-body">
   {{ homework.content }}
@@ -71,7 +72,7 @@
 </div>
 
 <div id="late" style="display: none;">
-<article id="late" class="message" ng-repeat="homework in lateList | orderBy:'-timestamp'">
+<article class="message" ng-repeat="homework in lateList | orderBy:'-timestamp'">
   <div class="message-header">
     {{ homework.subject }}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10px;">😘再接再厉~</span>
   </div>
@@ -80,6 +81,10 @@
   <span class="help">Deadline: {{ homework.deadline }}&nbsp;&nbsp;&nbsp;&nbsp;{{ getTimeText(homework.deadline) }}</span>
   </div>
 </article>
+<div id="no-late-work-notif" class="notification is-success" style="display: none;">
+  <p><span style="font-size: 20px;">0</span> Late Work!!!</p>
+  <p>奖励 10 朵花花🌺🌺🌺~</p>
+</div>
 </div>
 
 

@@ -117,13 +117,13 @@ CAControllers.controller('HomeworkCtrl', ['$scope', '$wilddogArray', "$window",
         $scope.markDone = function () {
             ref.child(selectedHomeworkId).update({"done":"YES", "doneAt":Wilddog.ServerValue.TIMESTAMP});
             // $scope.hideModal();
-            $window.location.href = "#homework";
+            $window.location.href = "#assignments";
         }
 
         $scope.deleteHomework = function () {
             ref.child(selectedHomeworkId).remove();
             // $scope.hideModal();
-            $window.location.href = "#homework";
+            $window.location.href = "#assignments";
         }
 
         $scope.getTimeText = function (dateText) {
@@ -189,6 +189,9 @@ CAControllers.controller('HomeworkCtrl', ['$scope', '$wilddogArray', "$window",
         $scope.todoList = [];
         $scope.doneList = [];
         $scope.lateList = [];
+
+        // 奖励花花
+        $scope.flowerCount = 0;
         
         $scope.todo.$loaded().then(function () {
             //to make sure that $scope.blogs is already loaded, otherwise length doesn't exist
@@ -207,23 +210,32 @@ CAControllers.controller('HomeworkCtrl', ['$scope', '$wilddogArray', "$window",
                 if (status == "late") {
                     $scope.lateList.push($scope.todo[i]);
                 } else if (status == "nohurry") {
-                    $scope.todo[i].nohurry = true
+                    $scope.todo[i].nohurry = true;
                     $scope.todoList.push($scope.todo[i]);
                 } else {
-                    $scope.todo[i].nohurry = false
+                    $scope.todo[i].nohurry = false;
                     $scope.todoList.push($scope.todo[i]);
                 }
+            }
+
+            if ($scope.lateList.length == 0) {
+                $("#no-late-work-notif").show();
+                $scope.flowerCount += 10;
+            } else {
+                $("#no-late-work-notif").hide();
             }
         });
         $scope.done.$loaded().then(function () {
             $scope.doneList = [];
 
             for(var i=0;i<$scope.done.length;i++){
+                $scope.flowerCount += $scope.done[i].type == "Test" ? 10 : ($scope.done[i].type == "Quiz" ? 3 : 1);
+
                 var dateText = $scope.done[i].deadline
                 if (dateText.length > 10) {
-                    dateText = dateText.substring(0,10) + "T" + dateText.substring(11)
+                    dateText = dateText.substring(0,10) + "T" + dateText.substring(11);
                 }
-                $scope.done[i].timestamp = Date.parse(dateText).getTime()
+                $scope.done[i].timestamp = Date.parse(dateText).getTime();
 
                 $scope.doneList.push($scope.todo[i]);
             }
@@ -248,13 +260,13 @@ CAControllers.controller('HomeworkNewCtrl', ['$scope', '$wilddogArray', "$window
                 createAt:Wilddog.ServerValue.TIMESTAMP,
             });
 
-            $window.location.href = "#homework";
+            $window.location.href = "#assignments";
         };
     }
 ]);
 
-CAControllers.controller('HomeworkEditCtrl', ['$scope', '$wilddogObject', "$window", "$routeParams",
-    function ($scope, $wilddogObject, $window, $routeParams){
+CAControllers.controller('HomeworkEditCtrl', ['$scope', '$wilddogObject', "$routeParams",
+    function ($scope, $wilddogObject, $routeParams){
         
         var ref = new Wilddog("https://chengkang.wilddogio.com/homework/"+$routeParams.id);
         // 创建一个同步数组

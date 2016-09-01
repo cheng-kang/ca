@@ -11,15 +11,15 @@ var CAApp = angular.module('CAApp', [
 
 CAApp.config(function($routeProvider) {
 	$routeProvider.
-		when('/homework', {
+		when('/assignments', {
 			templateUrl: './template/homework-list.html',
 			controller: 'HomeworkCtrl'
 		}).
-		when('/homework-new', {
+		when('/assignments-new', {
 			templateUrl: './template/homework-new.html',
 			controller: 'HomeworkNewCtrl'
 		}).
-		when('/homework-edit/id=:id', {
+		when('/assignments-edit/id=:id', {
 			templateUrl: './template/homework-edit.html',
 			controller: 'HomeworkEditCtrl'
 		}).
